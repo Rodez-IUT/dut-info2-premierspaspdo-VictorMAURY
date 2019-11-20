@@ -28,8 +28,54 @@
 		throw new PDOException($e->getMessage(), (int)$e->getCode());
 	}
 	
-	$stmt = $pdo->query("SELECT users.id, username, email, status.name FROM users JOIN status ON users.status_id = status.id WHERE username LIKE 'e%' AND status.id = '2' ORDER BY username ");
 	
+	if (isset($_GET["lettre"])) {
+		$maLettre = $_GET["lettre"];
+	} else {
+		$maLettre = "";
+	}
+	
+	if (isset($_GET["compte"])) {
+		$etat = $_GET["compte"];
+	}
+	
+	?>
+	<form method="get" action="all_users.php">  
+		Lettre: <input type="text" name="lettre"
+		<?php 
+			if(isset($_GET["lettre"])) {
+				echo "value = '$maLettre'";
+			}
+		?>
+		>
+		
+		<select name="compte">
+			<option 				<?php if (isset($_GET["compte"]) and $_GET["compte"] == 2 ) {
+										echo ' selected';
+									} 
+									?>
+									value="2">Active account</option>
+			<option 				<?php if (isset($_GET["compte"]) and $_GET["compte"] == 1 ) {
+										echo ' selected';
+									} 
+									?> 
+									value="1">Waiting for account validation</option>
+		</select>
+		<input type="submit" name="submit" value="Search">
+		
+	</form>
+	
+	
+	
+	<?php
+	
+	
+	
+	if (isset($maLettre) and isset($etat)) { 
+		$stmt = $pdo->query("SELECT users.id, username, email, status.name FROM users JOIN status ON users.status_id = status.id WHERE username LIKE '$maLettre%' AND status.id = '$etat' ORDER BY username ");
+	} else {
+		$stmt = $pdo->query("SELECT users.id, username, email, status.name FROM users JOIN status ON users.status_id = status.id ORDER BY username ");
+	}
 	echo "<table>";
 		echo "<tr>";
 			echo "<td>";
