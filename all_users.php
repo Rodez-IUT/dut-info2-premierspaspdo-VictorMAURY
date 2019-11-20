@@ -1,3 +1,12 @@
+<DOCTYPE HTML>
+<head>
+	<title>all_users.php</title>
+
+</head>
+
+<body>
+
+
 <?php
 
 	$host = 'localhost';
@@ -19,7 +28,7 @@
 		throw new PDOException($e->getMessage(), (int)$e->getCode());
 	}
 	
-	$stmt = $pdo->query('SELECT users.id, username, email, status.name FROM users JOIN status ON users.status_id = status.id ORDER BY username');
+	$stmt = $pdo->query("SELECT users.id, username, email, status.name FROM users JOIN status ON users.status_id = status.id WHERE username LIKE 'e%' AND status.id = '2' ORDER BY username ");
 	
 	echo "<table>";
 		echo "<tr>";
@@ -58,4 +67,7 @@
 
 ?>
 
+</body>
+
+</html>
 	
