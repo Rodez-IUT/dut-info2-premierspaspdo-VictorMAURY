@@ -72,7 +72,8 @@
 	
 	
 	if (isset($maLettre) and isset($etat)) { 
-		$stmt = $pdo->query("SELECT users.id, username, email, status.name FROM users JOIN status ON users.status_id = status.id WHERE username LIKE '$maLettre%' AND status.id = '$etat' ORDER BY username ");
+		$stmt = $pdo->prepare("SELECT users.id, username, email, status.name FROM users JOIN status ON users.status_id = status.id WHERE username LIKE :lettre AND status.id = :etat ORDER BY username ");
+		$stmt->execute(['lettre' => $maLettre."%", 'etat' => $etat]);
 	} else {
 		$stmt = $pdo->query("SELECT users.id, username, email, status.name FROM users JOIN status ON users.status_id = status.id ORDER BY username ");
 	}
