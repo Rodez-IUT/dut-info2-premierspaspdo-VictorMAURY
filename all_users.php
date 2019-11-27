@@ -6,6 +6,20 @@
 
 <body>
 
+<style>
+tr {
+	border-bottom: 1px solid grey;
+}
+
+td {
+	padding: 0 10px;
+}
+
+table {
+	border-collapse: collapse;
+	font-family: Arial;
+}
+</style>
 
 <?php
 
@@ -60,6 +74,14 @@
 									} 
 									?> 
 									value="1">Waiting for account validation</option>
+				
+			<option 				<?php if (isset($_GET["compte"]) and $_GET["compte"] == 3 ) {
+										echo ' selected';
+									} 
+									?> 
+									value="3">Waiting for account deletion</option>
+									
+									
 		</select>
 		<input type="submit" name="submit" value="Search">
 		
