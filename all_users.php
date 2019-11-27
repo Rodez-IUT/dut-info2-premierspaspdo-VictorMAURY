@@ -91,6 +91,10 @@ table {
 	
 	<?php
 	
+	if (isset ($_GET["user_id"]) and isset ($_GET["status_id"]) and isset ($_GET["action"])) {
+		// Ecrire le code d'action sur la BD
+	}
+	
 	
 	
 	if (isset($maLettre) and isset($etat)) { 
